@@ -1,3 +1,3 @@
-from SCL.Prototype import print_hello_world
+from SCL.Prototype import run_gui
 
-print_hello_world()
+run_gui()
