@@ -14,6 +14,7 @@ def run_gui():
 
     root = tk.Tk()
     app = Application(root)
+
     app.mainloop()
 
     print("Quiting...")
@@ -34,6 +35,13 @@ class Application(tk.Frame):
         self._master = master
         self.pack()
 
+        # window
+        self._window = tk.Toplevel(self)
+        pad = 3
+        g = "{0}x{1}+0+0".format(master.winfo_screenwidth()-pad, master.winfo_screenheight()-pad)
+        self._window.geometry(g)
+        self._window.overrideredirect(1)
+
         # buttons
         self._hi_button = None
         self._quit = None
@@ -49,12 +57,12 @@ class Application(tk.Frame):
         :return: 
         """
 
-        self._hi_button = tk.Button(self)
+        self._hi_button = tk.Button(self._window)
         self._hi_button["text"] = "Hello World\n(click me)"
         self._hi_button["command"] = self.say_hi
         self._hi_button.pack(side="top")
 
-        self._quit = tk.Button(self, text="QUIT", fg="red", command=self._master.destroy)
+        self._quit = tk.Button(self._window, text="QUIT", fg="red", command=self._master.destroy)
         self._quit.pack(side="bottom")
 
         pass
